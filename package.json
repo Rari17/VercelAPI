@@ -1,0 +1,12 @@
+{
+  "name": "vercel-gps-api",
+  "version": "1.0.0",
+  "description": "A simple Vercel API for receiving and fetching GPS data",
+  "main": "index.js",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
