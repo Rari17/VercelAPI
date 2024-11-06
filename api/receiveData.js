@@ -2,11 +2,14 @@ import { Client } from 'pg';
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
-        const { data } = req.body; // Nimmt das JSON-Datenobjekt aus dem POST-Body
+        const { data } = req.body;
+
+        // Verwende die passende Umgebungsvariable
         const client = new Client({
-            connectionString: process.env.VERCEL_DATABASE_URL,
+            connectionString: process.env.POSTGRES_URL,  // Hier den richtigen Identifier verwenden
             ssl: { rejectUnauthorized: false }
         });
+        
         await client.connect();
 
         const queryText = `
