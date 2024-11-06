@@ -1,17 +1,22 @@
-
-import { Client } from 'pg'; // PostgreSQL-Client für Node.js
+import { Client } from 'pg';
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
-        const { data } = req.body; // Angenommen, deine Daten kommen im Feld `data`
+        const { data } = req.body; // Nimmt das JSON-Datenobjekt aus dem POST-Body
         const client = new Client({
             connectionString: process.env.VERCEL_DATABASE_URL,
             ssl: { rejectUnauthorized: false }
         });
         await client.connect();
 
-        const queryText = 'INSERT INTO cow_location_data (latitude, longitude, date, time) VALUES($1, $2, $3, $4)';
-        const values = [data.latitude, data.longitude, data.date, data.time];
+        const queryText = `
+            INSERT INTO cow_location_data (id, cow_id, latitude, longitude, altitude, date, time)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+        `;
+        const values = [
+            data.id, data.cow_id, data.latitude, data.longitude, 
+            data.altitude, data.date, data.time
+        ];
 
         try {
             await client.query(queryText, values);
