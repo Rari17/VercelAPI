@@ -10,6 +10,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "pg": "^8.7.1"  // oder die neueste Version
+    "pg": "^8.7.1"  
   }
 }
